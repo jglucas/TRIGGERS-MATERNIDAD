@@ -1,0 +1,11 @@
+# TRIGGERS-MATERNIDAD
+select * from consulta
+
+	-- PROCEDIMIENTO ALMACENADO --
+	create procedure retorna
+			 @id_cliente char (15)
+	as
+	select cli.nombre_pacientes,con.control_visitas_fechas 
+	from consulta con inner join cliente cli on cli.id_cliente=con.id_clientepk
+	go
+	exec retorna '569'
