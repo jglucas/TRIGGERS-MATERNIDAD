@@ -1,0 +1,23 @@
+# TRIGGERS-MATERNIDAD
+-- tabla actualizar TRIGGERS -- 
+	create table VisitaNueva (
+	fecha date,
+	id_clientepk int,
+	descripcion varchar (60),
+	usuario varchar(80));
+	select * from VisitaNueva;
+
+	-- ACTUALIZAR visita --
+	create trigger TR_numeroVisita
+	on visitas for update 
+	as
+	set nocount on
+	declare @id_clientepk int
+	select @id_clientepk = id_clientepk from inserted
+	insert into VisitaNueva values(GETDATE(),@id_clientepk,
+	'Visita Actualizada',SYSTEM_USER)
+	go
+	update visitas set nueva_visita ='2020-12-09',total_visitas='6' where id_clientepk = 489
+	select * from VisitaNueva
+	select * from visitas
+	select * from doctor
