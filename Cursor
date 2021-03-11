@@ -1,0 +1,23 @@
+# TRIGGERS-MATERNIDAD
+-- CURSOR doctores--
+	declare  @id_doctor char(15),@nombre_doc char(15),@especialidad char(15),
+			 @nombre_pacientes char(15),@apellido char(15),
+			 @fecha_de_registro char(15)	 
+	declare cursorDoc6 cursor 
+	for select doc.id_doctor,doc.nombre_doc,doc.especialidad,cli.nombre_pacientes,cli.apellido,cli.fecha_de_registro
+	from doctor doc inner join cliente cli on  doc.id_doctor = cli.id_doctorpk
+	open cursorDoc6
+	fetch cursorDoc6 into @id_doctor,@nombre_doc,
+						 @especialidad,@nombre_pacientes,
+						 @apellido,@fecha_de_registro
+	print 'id_doctor  nombre_doc  especialidad  nombre_pacientes  apellido  fecha_de_registro'
+	print'-----------------------------------------------------------------------------------'
+	while @@FETCH_STATUS=0
+		begin
+		print @id_doctor++@nombre_doc++@especialidad++@nombre_pacientes++@apellido++@fecha_de_registro
+		fetch cursorDoc6 into @id_doctor,@nombre_doc,
+						    @especialidad,@nombre_pacientes,
+						    @apellido,@fecha_de_registro
+		end
+	close cursorDoc6
+	deallocate cursorDoc6
