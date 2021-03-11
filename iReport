@@ -1,0 +1,126 @@
+# TRIGGERS-MATERNIDAD
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report5" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="38a36d67-5065-450a-9d95-41ba9807ae7c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     medicina."vacuna" AS medicina_vacuna,
+     medicina."fecha_de_dosis" AS medicina_fecha_de_dosis,
+     medicina."dosis" AS medicina_dosis,
+     doctor."nombre_doc" AS doctor_nombre_doc,
+     cliente."nombre_pacientes" AS cliente_nombre_pacientes,
+     cliente."apellido" AS cliente_apellido
+FROM
+     "dbo"."doctor" doctor INNER JOIN "dbo"."medicina" medicina ON doctor."id_doctor" = medicina."id_doctorpk"
+     INNER JOIN "dbo"."cliente" cliente ON doctor."id_doctor" = cliente."id_doctorpk"
+     AND cliente."id_cliente" = medicina."id_clientepk"]]>
+	</queryString>
+	<field name="medicina_vacuna" class="java.lang.String"/>
+	<field name="medicina_fecha_de_dosis" class="java.lang.String"/>
+	<field name="medicina_dosis" class="java.lang.String"/>
+	<field name="doctor_nombre_doc" class="java.lang.String"/>
+	<field name="cliente_nombre_pacientes" class="java.lang.String"/>
+	<field name="cliente_apellido" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="88" y="0" width="327" height="23" uuid="81b3f9ac-71c3-47dc-868d-ab6519efc06b"/>
+				<textElement>
+					<font fontName="Berlin Sans FB Demi" size="16"/>
+				</textElement>
+				<text><![CDATA[REPORTE DOSIS DE VACUNAS DE PACIENTES]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="56" height="20" uuid="86d87dee-8685-44f6-a275-236f79b61316"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="0" width="61" height="20" uuid="8e32acd3-ff6e-4e70-8fc5-396b9c2b69b5"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="0" width="67" height="20" uuid="62fc276c-737e-46dd-a048-4b3c37b004de"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Doctor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="0" width="71" height="20" uuid="1c6b58d9-d61d-4bfb-851e-a46ab64bfecf"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Vacuna]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="0" width="63" height="20" uuid="5536855c-72f8-4d5e-aec9-26c47f9ee2a6"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="441" y="0" width="61" height="20" uuid="c5f4d7e7-4739-4f2e-ab23-3b0d12256498"/>
+				<textElement>
+					<font size="10" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Dosis]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="56" height="20" uuid="302d8187-e34b-460b-b8bc-704dbd77f97a"/>
+				<textFieldExpression><![CDATA[$F{cliente_nombre_pacientes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="76" y="0" width="61" height="20" uuid="894eaf16-6d25-495e-bac6-58f1dd95ef9e"/>
+				<textFieldExpression><![CDATA[$F{cliente_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="0" width="67" height="20" uuid="a619dfd0-22c9-4580-8064-aae6ce727196"/>
+				<textFieldExpression><![CDATA[$F{doctor_nombre_doc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="0" width="71" height="20" uuid="10ea66fa-15ee-4cce-8d24-a8594124fa93"/>
+				<textFieldExpression><![CDATA[$F{medicina_vacuna}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="0" width="63" height="20" uuid="2596d86e-c3ca-47fd-83d8-120b8e06ee4f"/>
+				<textFieldExpression><![CDATA[$F{medicina_fecha_de_dosis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="0" width="61" height="20" uuid="07e86241-d79c-4a26-b659-20a462a2a5ac"/>
+				<textFieldExpression><![CDATA[$F{medicina_dosis}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
