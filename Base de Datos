@@ -1,0 +1,191 @@
+# TRIGGERS-MATERNIDAD
+create database Maternidad_Salesiana
+
+	create table doctor(
+		id_doctor int primary key not null,
+		nombre_doc varchar(50),
+		cedula varchar(15),
+		especialidad varchar(50));
+
+	create table cliente(
+		id_cliente int primary key not null,
+		cedula varchar(50),
+		nombre_pacientes varchar(50),
+		apellido varchar(50),
+		direccion varchar(50),
+		telefono varchar(15),
+		fecha_de_registro date,
+		id_doctorpk int,
+		foreign key(id_doctorpk)references doctor(id_doctor));
+
+	create table medicina(
+		id_medicina int primary key not null,
+		descripcion_medicina varchar(50),
+		unidad varchar(30),
+		presentacion varchar(50),
+		vacuna varchar(50),
+		fecha_de_dosis date,
+		dosis varchar(50),
+		id_clientepk int,
+		id_doctorpk int,
+		foreign key(id_clientepk)references cliente(id_cliente),
+		foreign key(id_doctorpk)references doctor(id_doctor));
+
+	create table prematuro(
+		id_prematuro int primary key not null ,
+		nombre_bebe varchar(60),
+		fecha_de_ingreso date,
+		genero varchar(50),
+		id_medicinapk int,
+		foreign key(id_medicinapk)references medicina(id_medicina));
+
+	create table consulta(
+		id_consulta int primary key not null,
+		nombre_pacientes varchar(50),
+		control_visitas_fechas date,
+		visita_1 varchar(40),
+		visita_2 varchar(40),
+		visita_3 varchar(40),
+		visita_4 varchar(40),
+		visita_5 varchar(40),
+		total_visitas varchar(10),
+		id_clientepk int,
+		id_prematuropk int,
+		foreign key(id_clientepk)references cliente(id_cliente),
+		foreign key (id_prematuropk)references prematuro(id_prematuro));
+
+	create table visitas(
+		id_visitas int primary key not null,
+		nueva_visita varchar(50),
+		total_visitas varchar(30),
+		id_clientepk int,
+		foreign key(id_clientepk)references cliente(id_cliente));
+
+	insert into visitas (id_visitas,nueva_visita,total_visitas,id_clientepk)values
+	(100,'','5',489)
+	insert into visitas (id_visitas,nueva_visita,total_visitas,id_clientepk)values
+	(101,'','5',569)
+	insert into visitas (id_visitas,nueva_visita,total_visitas,id_clientepk)values
+	(102,'','5',751)
+	insert into visitas (id_visitas,nueva_visita,total_visitas,id_clientepk)values
+	(103,'','5',165)
+	insert into visitas (id_visitas,nueva_visita,total_visitas,id_clientepk)values
+	(104,'','5',395)
+	select * from visitas
+
+	insert into doctor (id_doctor,nombre_doc,cedula,especialidad)values
+	(01,'Dr.Samuel','1304800259','pediatra')
+	insert into doctor (id_doctor,nombre_doc,cedula,especialidad)values
+	(02,'Dr.Enrique','1305956211','pediatra')
+	insert into doctor (id_doctor,nombre_doc,cedula,especialidad)values
+	(03,'Dr.Miguel','1309632887','pediatra')
+	insert into doctor (id_doctor,nombre_doc,cedula,especialidad)values
+	(04,'Dr.Jose','1304800251','pediatra')
+	insert into doctor (id_doctor,nombre_doc,cedula,especialidad)values
+	(05,'Dr.Jimmy','1308598773','pediatra')
+	select * from doctor;
+
+	insert into cliente (id_cliente,cedula,nombre_pacientes,apellido,direccion,telefono,fecha_de_registro,id_doctorpk)values
+	(489,'1306945628','selena','zambrano','calle16av29','0985741259','03-03-2020',01)
+	insert into cliente (id_cliente,cedula,nombre_pacientes,apellido,direccion,telefono,fecha_de_registro,id_doctorpk)values
+	(569,'1316689742','maria','vera','calle12av18','095622214','05-01-2020',02)
+	insert into cliente (id_cliente,cedula,nombre_pacientes,apellido,direccion,telefono,fecha_de_registro,id_doctorpk)values
+	(751,'1305520111','belen','sanchez','calle11av10','0856412433','07-02-2020',03)
+	insert into cliente (id_cliente,cedula,nombre_pacientes,apellido,direccion,telefono,fecha_de_registro,id_doctorpk)values
+	(165,'1318927888','belinda','rodriguez','calle24av12','0956622571','02-06-2020',04)
+	insert into cliente (id_cliente,cedula,nombre_pacientes,apellido,direccion,telefono,fecha_de_registro,id_doctorpk)values
+	(395,'1305522162','roxana','velez','calle26av8','0936555987','10-12-2020',05)
+	select * from cliente;
+
+	insert into medicina (id_medicina,descripcion_medicina,unidad,presentacion,vacuna,fecha_de_dosis,dosis,id_clientepk,id_doctorpk)values
+	(011,'tétano','miligramos','frasco','hepatitis_b','2020-01-13','1 dosis',489,01)
+	insert into medicina (id_medicina,descripcion_medicina,unidad,presentacion,vacuna,fecha_de_dosis,dosis,id_clientepk,id_doctorpk)values
+	(012,'difteria','miligramos','frasco','hib','2020-05-12','3 dosis',569,02)
+	insert into medicina (id_medicina,descripcion_medicina,unidad,presentacion,vacuna,fecha_de_dosis,dosis,id_clientepk,id_doctorpk)values
+	(013,'pertussis','miligramos','frasco','pertussis','2020-12-22','5 dosis',751,03)
+	insert into medicina (id_medicina,descripcion_medicina,unidad,presentacion,vacuna,fecha_de_dosis,dosis,id_clientepk,id_doctorpk)values
+	(014,'hib','miligramos','tetano','frasco','2020-11-11','4 dosis',165,04)
+	insert into medicina (id_medicina,descripcion_medicina,unidad,presentacion,vacuna,fecha_de_dosis,dosis,id_clientepk,id_doctorpk)values
+	(015,'poliomielitis','miligramos','frasco','difteria','2020-08-30','2 dosis',395,05)
+	select * from medicina;
+
+	insert into prematuro (id_prematuro,nombre_bebe,fecha_de_ingreso,genero,id_medicinapk)values
+	(0155,'samuel','2020-03-11','masculino',012)
+	insert into prematuro (id_prematuro,nombre_bebe,fecha_de_ingreso,genero,id_medicinapk)values
+	(0520,'issac','2020-01-10','masculino',011)
+	insert into prematuro (id_prematuro,nombre_bebe,fecha_de_ingreso,genero,id_medicinapk)values
+	(0780,'liam','2020-02-14','masculino',013)	
+	insert into prematuro (id_prematuro,nombre_bebe,fecha_de_ingreso,genero,id_medicinapk)values
+	(0235,'camila','2020-06-15','femenino',014)
+	insert into prematuro (id_prematuro,nombre_bebe,fecha_de_ingreso,genero,id_medicinapk)values
+	(0895,'salome','2020-04-16','femenino',015)
+	select * from prematuro;
+
+	insert into consulta (id_consulta,nombre_pacientes,control_visitas_fechas,visita_1,visita_2,visita_3,visita_4,visita_5,id_clientepk,id_prematuropk)values
+	(489,'selena','03-03-2020','23-12-2020','03-07-2020','21-08-2020','9-09-2020','05-10-2020',489,0255)
+	insert into consulta (id_consulta,nombre_pacientes,control_visitas_fechas,visita_1,visita_2,visita_3,visita_4,visita_5,id_clientepk,id_prematuropk)values
+	(569,'maria','05-01-2020','22-03-2020','05-06-2020','20-09-2020','6-10-2020','03-05-2020',569,0528)
+	insert into consulta (id_consulta,nombre_pacientes,control_visitas_fechas,visita_1,visita_2,visita_3,visita_4,visita_5,id_clientepk,id_prematuropk)values
+	(750,'belen','07-02-2020','25-06-2020','08-03-2020','19-02-2020','08-02-2020','09-08-2020',751,0780)
+	insert into consulta (id_consulta,nombre_pacientes,control_visitas_fechas,visita_1,visita_2,visita_3,visita_4,visita_5,id_clientepk,id_prematuropk)values
+	(165,'belinda','02-06-2020','02-07-2020','07-04-2020','21-04-2020','05-09-2020','20-06-2020',165,0235)
+	insert into consulta (id_consulta,nombre_pacientes,control_visitas_fechas,visita_1,visita_2,visita_3,visita_4,visita_5,id_clientepk,id_prematuropk)values
+	(395,'roxana','2020-02-03','19-09-2020','10-07-2020','21-07-2020','01-05-2020','01-09-2020',395,0895)
+	select * from consulta;
+
+	-- tabla actualizar TRIGGERS -- 
+	create table VisitaNueva (
+	fecha date,
+	id_clientepk int,
+	descripcion varchar (60),
+	usuario varchar(80));
+	select * from VisitaNueva;
+
+	-- ACTUALIZAR visita --
+	create trigger TR_numeroVisita
+	on visitas for update 
+	as
+	set nocount on
+	declare @id_clientepk int
+	select @id_clientepk = id_clientepk from inserted
+	insert into VisitaNueva values(GETDATE(),@id_clientepk,
+	'Visita Actualizada',SYSTEM_USER)
+	go
+	update visitas set nueva_visita ='2020-12-09',total_visitas='6' where id_clientepk = 489
+	select * from VisitaNueva
+	select * from visitas
+	select * from doctor
+
+	-- CURSOR doctores--
+	declare  @id_doctor char(15),@nombre_doc char(15),@especialidad char(15),
+			 @nombre_pacientes char(15),@apellido char(15),
+			 @fecha_de_registro char(15)	 
+	declare cursorDoc6 cursor 
+	for select doc.id_doctor,doc.nombre_doc,doc.especialidad,cli.nombre_pacientes,cli.apellido,cli.fecha_de_registro
+	from doctor doc inner join cliente cli on  doc.id_doctor = cli.id_doctorpk
+	open cursorDoc6
+	fetch cursorDoc6 into @id_doctor,@nombre_doc,
+						 @especialidad,@nombre_pacientes,
+						 @apellido,@fecha_de_registro
+	print 'id_doctor  nombre_doc  especialidad  nombre_pacientes  apellido  fecha_de_registro'
+	print'-----------------------------------------------------------------------------------'
+	while @@FETCH_STATUS=0
+		begin
+		print @id_doctor++@nombre_doc++@especialidad++@nombre_pacientes++@apellido++@fecha_de_registro
+		fetch cursorDoc6 into @id_doctor,@nombre_doc,
+						    @especialidad,@nombre_pacientes,
+						    @apellido,@fecha_de_registro
+		end
+	close cursorDoc6
+	deallocate cursorDoc6
+
+	select * from consulta
+
+	-- PROCEDIMIENTO ALMACENADO --
+	create procedure retorna
+			 @id_cliente char (15)
+	as
+	select cli.nombre_pacientes,con.control_visitas_fechas 
+	from consulta con inner join cliente cli on cli.id_cliente=con.id_clientepk
+	go
+	exec retorna '569'
